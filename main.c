@@ -176,7 +176,25 @@ void UserMood()
 // View Patient Record
 void viewPatientRecord()
 {
-//Rawda
+
+    int patientID;
+    printf("PLEASE ENTER YOUR ID: \n");
+    scanf("%d",&patientID);
+    
+        int ID = searchPatientID(patientID);
+        if (ID  == 0)
+        {
+            printf(" There is no any patient with this ID\n");
+        }
+        else
+        {
+            printf("The Basic Information Of The Patient`s IS : \n");
+            printf(" THE ID IS : %d\n", patients[ID ].patientID);
+            printf("THE NAME IS: %s\n", patients[ID ].name);
+            printf("THE Age IS: %d\n", patients[ID ].age);
+            printf("THE gender IS: %s\n", patients[ID ].gender);
+            printf("THE consult_flag IS: %s\n", (patients[ID ].consult_flag ));
+    }
 }
 // View todays's Reservations
 void viewReservations()
