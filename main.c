@@ -79,17 +79,19 @@ void adminMenu()
         printf("1. Reserve Slot\n");
         printf("2. Edit Patient Record\n");
         printf("3. Cancel Reservation\n");
-        printf("4. Logout\n");
+        printf("4. usermood\n");
+        printf("5. Logout\n");
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
         switch(choice)
         {
-            case 1: reserveSlot(); break;
-            case 2: editPatientRecord(); break;
-            case 3: cancelReservation(); break;
-            case 4: printf("Logging out...\n"); break;
+            case 1: reserveSlot();choice=4; break;
+            case 2: editPatientRecord();choice=4; break;
+            case 3: cancelReservation();choice=4; break;
+            case 4: UserMood(); choice=4; break;
+            case 5: printf("Logging out...\n"); break;
             default: printf("Invalid choice. Try again.\n");
         }
     } while(choice != 4);
@@ -128,8 +130,8 @@ void reserveSlot()
 
         switch(choice)
         {
-            case 1: NewPatient(); break;
-            case 2: ExistingPatient(); break;
+            case 1: NewPatient();choice=3; break;
+            case 2: ExistingPatient(); choice=3; break;
             case 3: printf("back step\n"); break;
             default: printf("Invalid choice. Try again.\n");
         }
