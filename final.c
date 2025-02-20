@@ -4,7 +4,6 @@
 // Main Function
 int main()
 {
-    printf("Hi Eslammmmm");
     Home_Menu();
     return 0;
 }

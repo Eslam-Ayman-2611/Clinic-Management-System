@@ -101,16 +101,10 @@ int searchPatient(int patientID)
 return 0 ;
 }
 
-// Add New Patient Record
-void addPatientRecord()
-{
-
-}
-
 // Edit Existing Patient Record
 void editPatientRecord()
 {
-
+//Mohamed
 }
 
 
@@ -127,19 +121,19 @@ void reserveSlot()
         printf("\n You want : \n");
         printf("1. Register as New patient\n");
         printf("2. Register as pre-existing patient\n");
-        printf("3. Logout\n");
+        printf("3. Back\n");
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
         switch(choice)
         {
-            case 1: reserveSlot(); break;
-            case 2: editPatientRecord(); break;
-            case 3: printf("Logging out...\n"); break;
+            case 1: NewPatient(); break;
+            case 2: ExistingPatient(); break;
+            case 3: printf("back step\n"); break;
             default: printf("Invalid choice. Try again.\n");
         }
-    } while(choice != 4);
+    } while(choice != 3);
         }
     }
 
@@ -148,7 +142,7 @@ void reserveSlot()
 // Cancel a Reservation
 void cancelReservation()
 {
-
+//amir
 }
 
 
@@ -180,10 +174,43 @@ void UserMood()
 // View Patient Record
 void viewPatientRecord()
 {
-
+//Rawda
 }
 // View todays's Reservations
 void viewReservations()
 {
+//Rawda
+}
+void NewPatient()
+{
+//Omar
+}
+//Eslam
+void ExistingPatient()
+{
+  int ID ;
+  int PatientLocation ;
 
+  printf(" Enter Your ID .\n");
+  scanf("%d",&ID);
+  PatientLocation=searchPatient( ID);
+  if(PatientLocation==0)
+  {
+    Printf(" We don't have this ID ");
+  }
+  else
+  {
+    if(patients[PatientLocation].consult_flag==1)
+    {
+    Printf(" You already recorded slot and consultation ");
+    }
+    else 
+    {
+        reserveingSlot();
+    }
+  }
+}
+void reserveingSlot()
+{
+    //Eslam&omar
 }
