@@ -181,8 +181,9 @@ void viewReservations()
 {
 //Rawda
 }
-int checkSlotAvailable(int patientID)
+int checkpatientresearve(int patientID)
 {
+    //amir
     return 0 ;
 }
 void NewPatient()
@@ -200,13 +201,13 @@ void ExistingPatient()
   PatientLocation=searchPatient( ID);
   if(PatientLocation==0)
   {
-    Printf(" We don't have this ID ");
+    printf(" We don't have this ID ");
   }
   else
   {
     if(patients[PatientLocation].consult_flag==1)
     {
-    Printf(" You already recorded slot and consultation ");
+    printf(" You already recorded slot and consultation ");
     }
     else 
     {

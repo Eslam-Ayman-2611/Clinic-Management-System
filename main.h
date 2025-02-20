@@ -26,16 +26,17 @@ int patientCount = 0;
 int slotCount = 0;
 
 //==========================Functions Declrations============================================
-void Home_Menu();//Eslam
-void adminLogin();//omar
-void adminMenu();//omar
+void Home_Menu();//Team
+void adminLogin();//Omar&Eslam
+void adminMenu();//Team
 int searchPatientID(int patientID);//mohamed
-void UserMood();//eslam
+void UserMood();//Team
 void reserveSlot();//Eslam&omar
 void editPatientRecord();//Mohamed
-void cancelReservation();//amir
+void cancelReservation();//Amir
 void viewPatientRecord();//rawda
 void viewReservations();//rawda
-int checkSlotAvailable(int patientID);//amir
+int checkpatientresearve(int patientID);//Amir
 void NewPatient();//omar
-void reserveingSlot();//eslam
+void ExistingPatient();//Eslam
+void reserveingSlot();//Wating....
