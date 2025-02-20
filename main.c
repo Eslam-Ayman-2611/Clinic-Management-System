@@ -181,6 +181,10 @@ void viewReservations()
 {
 //Rawda
 }
+int checkSlotAvailable(int patientID)
+{
+    return 0 ;
+}
 void NewPatient()
 {
 //Omar
