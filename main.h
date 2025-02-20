@@ -36,4 +36,4 @@ void editPatientRecord();
 void cancelReservation();
 void viewPatientRecord();
 void viewReservations();
-int checkSlotAvailable(int day, int slot);
+int checkSlotAvailable(int patientID);
