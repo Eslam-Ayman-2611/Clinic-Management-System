@@ -45,7 +45,8 @@ void viewPatientRecord();//rawda ============================ works well
 void viewReservations();//rawda
 int checkpatientresearve(int patientID);//Amir
 void NewPatient();//omar ==================================== works well
+int FirstEmptyIndex();//omar
 void ExistingPatient();//Eslam
-void reserveingSlot(int ID);//Wating....
+void reserveingSlot(int ID);//Eslam
 int checkIDavailable(int ID);//Eslam========================= works well
 void printpatientdata(ID);

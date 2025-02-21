@@ -442,20 +442,22 @@ int checkpatientresearve(int patientID) {
 //======================================================new patient============================================================
 void NewPatient()
 {
-    if(patientCount<35&&slotCount<35)
+    if(patientCount<35&&slotCount<35&&FirstEmptyIndex()!=-1)
     {
+        int index=FirstEmptyIndex();
+
          printf("Entering new patient data:\n");
 
          printf("Enter name:\n");
          fflush(stdin);
-         gets(patients[patientCount].name);
+         gets(patients[index].name);
 
          printf("Enter age:\n");
-         scanf("%i",&patients[patientCount].age);
+         scanf("%i",&patients[index].age);
 
          printf("Enter gender:\n");
          fflush(stdin);
-         gets(patients[patientCount].gender);
+         gets(patients[index].gender);
 
          int id;
          int flag = 0 ;
@@ -466,7 +468,7 @@ void NewPatient()
             scanf("%i",&id);
             if(checkIDavailable(id)==1)
             {
-               patients[patientCount].patientID=id;
+               patients[index].patientID=id;
                reserveingSlot(id);
                printf("Patient data successfully added!!\n");
                patientCount++;
@@ -478,12 +480,27 @@ void NewPatient()
                 printf(" try another one \n");
             }
          } while (flag==0);
-         
+
     }
     else
     {
         printf("Maximum weekly capacitance reached!!\n");
     }
+}
+int FirstEmptyIndex()
+{
+    int i;
+    for (i = 0; i < MAX_PATIENTS; i++)
+    {
+        if (strcmp(patients[i].name, "") == 0 &&
+            patients[i].age == 0 &&
+            strcmp(patients[i].gender, "") == 0 &&
+            patients[i].patientID == 0)
+        {
+            return i; // Return the first empty index found
+        }
+    }
+    return -1; // Return -1 if no empty slot is found
 }
 //==Eslam============================================================Existing Patient ====================================================
 void ExistingPatient()
