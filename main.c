@@ -272,7 +272,7 @@ void deletepatientdata(int PatientLocation) {
     strcpy(patients[PatientLocation].name, "");
   }
   
-  void cancelReservation() {
+void cancelReservation() {
   
     int ID;
     int PatientLocation;
