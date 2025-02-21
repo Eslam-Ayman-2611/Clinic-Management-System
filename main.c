@@ -94,7 +94,7 @@ void adminMenu()
     } while(choice != 4);
 
 }
-//=Mohamed======================================================  Reserve a Slot ============================================================
+//=Mohamed======================================================  edit Patient Record ============================================================
 int searchPatient(int patientID)
 {
     int i;
@@ -265,10 +265,10 @@ void reserveSlot()
 //=Amir======================================================  Cancel a Reservation ============================================================
 void deletepatientdata(int PatientLocation) {
     patients[PatientLocation].age = 0;
-    patients[PatientLocation].consult_flag = 0;
     patients[PatientLocation].patientID= 0;
     strcpy(patients[PatientLocation].gender, "");
     strcpy(patients[PatientLocation].name, "");
+    patientCount--;
   }
   
 void cancelReservation() {
@@ -278,7 +278,7 @@ void cancelReservation() {
   
     printf(" Enter Your ID .\n");
     scanf("%d", &ID);
-    PatientLocation = searchPatientID(ID);
+    PatientLocation = searchPatient(ID);
     
     if (PatientLocation !=-1)
     {
@@ -289,10 +289,15 @@ void cancelReservation() {
         {
           if (busySlots[d][s]==ID)
           {
-  
-                 busySlots [d] [s] = 0;
+                 busySlots [d] [s] = 0;//
                availableSlots[d][s] = 1;
-              deletepatientdata (PatientLocation);
+               slotCount--;
+               if(patients[PatientLocation].consult_flag==0)
+                {deletepatientdata (PatientLocation);}
+                else 
+                {
+                    patients[PatientLocation].consult_flag=0;
+                }
           }
         }
       }
@@ -338,7 +343,7 @@ void viewPatientRecord()
     printf("PLEASE ENTER YOUR ID: \n");
     scanf("%d",&patientID);
 
-        int ID = searchPatientID(patientID);
+        int ID = searchPatient(patientID);
         if (ID  == -1)
         {
             printf(" There is no any patient with this ID\n");
@@ -360,25 +365,31 @@ void viewPatientRecord()
 //==Rawda====================================================== view Reservations ============================================================
 void viewReservations()
 {
-//Rawda
+  printf("Today's Reservations with patints ID and Time Slot:\n");
+
+   int flag = 0;  //<There is no Reservation if flag =0 >  < flag=1___Reservation >
+
+    for (int day = 0; day < DAYS_IN_WEEK; day++)
+        {
+        for (int slot = 0; slot < SLOTS_PER_DAY; slot++)
+        {
+            if (busySlots[day][slot] != 0) //<There is Reservation in Day>
+            {
+                flag = 1;
+                printf("Day %d, Slot %d: Patient ID %d\n", day + 1, slot + 1, busySlots[day][slot]);
+            }
+        }
+    }
+    if (!flag ) {
+        printf("No reservations for today.\n");
+    }
 }
 //==Amir===========================================================check patient researve ====================================================
-int searchPatientID(int ID)
-{
-  for (int i = 0; i < MAX_PATIENTS; i++) 
-  {
-      if ((patients[i].patientID) ==ID) 
-      {
-        return (i);
-      }
-  }
-    return (-1);
-}
 
 int checkpatientresearve(int patientID) {
 
   int PatientLocation;
-  PatientLocation = searchPatientID(patientID);
+  PatientLocation = searchPatient(patientID);
 
   if (PatientLocation != -1)
   {
@@ -400,7 +411,6 @@ int checkpatientresearve(int patientID) {
     printf("User not found");
     return 0;
   }
-
 }
 //======================================================new patient============================================================
 void NewPatient()
@@ -492,6 +502,11 @@ void reserveingSlot(int ID )
         printf(" 6-Thursday : \n");
         printf(" 7-Friday : \n");
         scanf("%d",&day);
+        if (day < 1 || day > 7)
+            {
+                printf("Invalid day! Please choose between 1 and 7.\n");
+                continue;
+            }        
         day--;
                                 ////////////////////////////////////////////////////////////
             printf(" Empty slots : \n");

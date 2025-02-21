@@ -35,7 +35,7 @@ int slotCount = 0;
 void Home_Menu();//Team 
 void adminLogin();//Omar&Eslam
 void adminMenu();//Team
-int searchPatientID(int patientID);//mohamed
+int searchPatient(int patientID);//mohamed
 void editPatientRecord();//Mohamed
 void reserveSlot();//Eslam&omar
 void deletepatientdata(int PatientLocation);//Amir
@@ -43,7 +43,6 @@ void cancelReservation();//Amir
 void UserMood();//Team
 void viewPatientRecord();//rawda ============================ works well
 void viewReservations();//rawda
-int searchPatientID(int ID);//Amir
 int checkpatientresearve(int patientID);//Amir
 void NewPatient();//omar ==================================== works well
 void ExistingPatient();//Eslam
