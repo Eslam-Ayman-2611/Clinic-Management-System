@@ -85,7 +85,7 @@ void adminMenu()
 
         switch(choice)
         {
-            case 1: reserveSlot();choice=4; break;
+            case 1: reserveSlot(); break;
             case 2: editPatientRecord();choice=4; break;
             case 3: cancelReservation();choice=4; break;
             case 4: UserMood(); choice=4; break;
@@ -116,7 +116,7 @@ void editPatientRecord()
 
         printf("Welcom to Edit mode....\n");
         printf("please enter the ID..\n");
-        scanf("%i",ID);
+        scanf("%i",&ID);
 
         Index=searchPatient(ID);
 
@@ -155,7 +155,7 @@ void editPatientRecord()
                 ///////////////////////////////////////////
             case 2:
                  printf("New Age is:\n");
-                scanf("%i",patients[Index].age);
+                scanf("%i",&patients[Index].age);
 
                 printf("update Patient details....\n");
                 printf("ID: %i \n",patients[Index].patientID);
@@ -187,7 +187,7 @@ void editPatientRecord()
                 scanf("%[^\n]",patients[Index].name);
 
                 printf("New Age is:\n");
-                scanf("%i",patients[Index].age);
+                scanf("%i",&patients[Index].age);
 
                 printf("New Gender is:\n");
                 scanf("%[^\n]",patients[Index].gender);
@@ -340,18 +340,18 @@ void viewPatientRecord()
     scanf("%d",&patientID);
 
         int ID = searchPatientID(patientID);
-        if (ID  == 0)
+        if (ID  == -1)
         {
             printf(" There is no any patient with this ID\n");
         }
         else
         {
             printf("The Basic Information Of The Patient`s IS : \n");
-            printf(" THE ID IS : %d\n", patients[ID ].patientID);
-            printf("THE NAME IS: %s\n", patients[ID ].name);
-            printf("THE Age IS: %d\n", patients[ID ].age);
-            printf("THE gender IS: %s\n", patients[ID ].gender);
-            printf("THE consult_flag IS: %s\n", (patients[ID ].consult_flag ));
+            printf("THE NAME IS: %s\n", patients[ID].name);
+            printf("THE gender IS: %s\n", patients[ID].gender);
+            printf("THE Age IS: %d\n", patients[ID].age);
+            printf(" THE ID IS : %d\n", patients[ID].patientID);
+            printf("THE consult_flag IS: %c\n", (patients[ID ].consult_flag ));
     }
 }
 //==Rawda====================================================== view Reservations ============================================================
@@ -362,13 +362,14 @@ void viewReservations()
 //==Amir===========================================================check patient researve ====================================================
 int searchPatientID(int ID)
 {
-  for (int i = 0; i < MAX_PATIENTS; i++) {
-
-      if ((patients[i].patientID) ==ID) {
-      return (i);
-    }
+  for (int i = 0; i < MAX_PATIENTS; i++) 
+  {
+      if ((patients[i].patientID) ==ID) 
+      {
+        return (i);
+      }
   }
-    return -1;
+    return (-1);
 }
 
 int checkpatientresearve(int patientID) {
@@ -417,23 +418,28 @@ void NewPatient()
          fflush(stdin);
          gets(patients[patientCount].gender);
 
-         printf("Enter ID:\n");
          int id;
-         scanf("%i",&id);
-         if(!(searchPatient(id)-1))
+         int flag = 0 ;
+         do
          {
-            patients[patientCount].patientID=id;
-            printf("Patient data successfully added!!\n");
-            patientCount++;
-         }
-         else
-        {
-            printf("ID already exists!!\n");
-            return;
-        }
-
+            printf("* Note that: \n1-ID must contain 4 numbers not started whith 0 \n 2-ID must be unique \n");
+            printf(" Enter ID:\n");
+            scanf("%i",&id);
+            if(checkIDavailable(id)==1)
+            {
+               patients[patientCount].patientID=id;
+               printf("Patient data successfully added!!\n");
+               patientCount++;
+               flag++;
+            }
+            else
+            {
+                printf(" Invalid ID \n");
+                printf(" try another one \n");
+            }
+         } while (flag==0);
+         
     }
-
     else
     {
         printf("Maximum weekly capacitance reached!!\n");
@@ -468,4 +474,19 @@ void ExistingPatient()
 void reserveingSlot()
 {
     //Eslam&omar
+}
+int checkIDavailable(int ID){
+if(ID>=1000&&ID<=9999)
+{
+    for(int i =0 ; i<patientCount;i++)
+    {
+        if(patients[i].patientID==ID)
+            {
+                return 1 ;
+            }
+    }
+return 1 ;
+}
+
+return 1 ;
 }

@@ -40,3 +40,4 @@ int checkpatientresearve(int patientID);//Amir
 void NewPatient();//omar
 void ExistingPatient();//Eslam
 void reserveingSlot();//Wating....
+int checkIDavailable(int ID);
