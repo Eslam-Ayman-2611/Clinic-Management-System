@@ -100,7 +100,7 @@ int searchPatient(int patientID)
     int i;
     for (i =0;i<MAX_PATIENTS;i++)
         {
-            if (patients[i].patientID==patientID)
+            if (patients[i].patientID==patientID&&patients[i].patientID!=0)
                 return (i) ;
         }
 return -1 ;
