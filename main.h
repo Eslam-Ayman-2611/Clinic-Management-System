@@ -48,3 +48,4 @@ void NewPatient();//omar ==================================== works well
 void ExistingPatient();//Eslam
 void reserveingSlot(int ID);//Wating....
 int checkIDavailable(int ID);//Eslam========================= works well
+void printpatientdata(ID);

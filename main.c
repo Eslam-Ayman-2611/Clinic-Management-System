@@ -122,10 +122,7 @@ void editPatientRecord()
          if(Index>-1)
          {
              printf("Patient details....\n");
-             printf("ID: %i \n",patients[Index].patientID);
-             printf("Name: %s\n",patients[Index].name);
-             printf("age: %i\n",patients[Index].age);
-             printf("Gender: %s \n",patients[Index].gender);
+             printpatientdata(Index);
             ////////////////////////////////////////////////////
              printf("what do you want to Edit...\n");
              printf("1. Name \n");
@@ -146,24 +143,16 @@ void editPatientRecord()
                 gets(patients[Index].name);
 
                 printf("update Patient details....\n");
-                printf("ID: %i \n",patients[Index].patientID);
-                printf("Name: %s\n",patients[Index].name);
-                printf("age: %i\n",patients[Index].age);
-                printf("Gender: %s \n",patients[Index].gender);
-                printf("Reservation has not changed...\n");
+                printpatientdata(Index);
                 exit_flag = 1;
                 break;
                 ///////////////////////////////////////////
             case 2:
-                 printf("New Age is:\n");
+                printf("New Age is:\n");
                 scanf("%i",&patients[Index].age);
 
                 printf("update Patient details....\n");
-                printf("ID: %i \n",patients[Index].patientID);
-                printf("Name: %s\n",patients[Index].name);
-                printf("age: %i\n",patients[Index].age);
-                printf("Gender: %s \n",patients[Index].gender);
-                printf("Reservation has not changed...\n");
+                printpatientdata(Index);
                 exit_flag = 1;
                 break;
                 //////////////////////////////////////////////
@@ -173,11 +162,7 @@ void editPatientRecord()
                 gets(patients[Index].gender);
 
                 printf("update Patient details....\n");
-                printf("ID: %i \n",patients[Index].patientID);
-                printf("Name: %s\n",patients[Index].name);
-                printf("age: %i\n",patients[Index].age);
-                printf("Gender: %s \n",patients[Index].gender);
-                printf("Reservation has not changed...\n");
+                printpatientdata(Index);
                 exit_flag = 1;
                 break;
                 /////////////////////////////////////////////
@@ -202,11 +187,7 @@ void editPatientRecord()
                 cancelReservation();  //لسه في شغل هنا
                 //reserve   eslam&omar
 
-                printf("update Patient details....\n");
-                printf("ID: %i \n",patients[Index].patientID);
-                printf("Name: %s\n",patients[Index].name);
-                printf("age: %i\n",patients[Index].age);
-                printf("Gender: %s \n",patients[Index].gender);
+                printpatientdata(Index);
                 exit_flag = 1;
                 break;
                 ////////////////////////////////////////////
@@ -224,16 +205,14 @@ void editPatientRecord()
 
 
          }
-            else{
-
+            else
+            {
                 printf("sorry , The ID is not exist ");
-
             }
-
-
-          if (exit_flag) {             // if True (1)
-                           break;
-                          }
+            if (exit_flag) 
+            {             // if True (1)
+               break;
+            }
          }
 //Mohamed
 }
@@ -388,14 +367,7 @@ void viewPatientRecord()
         else
         {
             printf("The Basic Information Of The Patient`s IS : \n");
-            printf("The Name is: %s\n", patients[ID].name);
-            printf("The Gender is: %s\n", patients[ID].gender);
-            printf("The Age is: %d\n", patients[ID].age);
-            printf("The ID is : %d\n", patients[ID].patientID);
-            if(patients[ID ].consult_flag==1)
-            printf("Consultation Reserved \n");
-            else
-            printf("No consultation Reserved \n");
+            printpatientdata(ID);
         
         }
 }
@@ -615,4 +587,14 @@ return 1 ;
 return 0 ;
 }
 //============================================================== check ID available ====================================================
-
+void printpatientdata(ID)
+    {
+        printf("The Name is: %s\n", patients[ID].name);
+        printf("The Gender is: %s\n", patients[ID].gender);
+        printf("The Age is: %d\n", patients[ID].age);
+        printf("The ID is : %d\n", patients[ID].patientID);
+        if(patients[ID ].consult_flag==1)
+            printf("Consultation Reserved \n");
+        else
+            printf("No consultation Reserved \n");
+    }
