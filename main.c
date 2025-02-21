@@ -269,10 +269,47 @@ void reserveSlot()
 }
 
 // Cancel a Reservation
-void cancelReservation()
-{
-//amir
-}
+void deletepatientdata(int PatientLocation) {
+    patients[PatientLocation].age = 0;
+    patients[PatientLocation].consult_flag = 0;
+    patients[PatientLocation].patientID= 0;
+    strcpy(patients[PatientLocation].gender, "");
+    strcpy(patients[PatientLocation].name, "");
+  }
+  
+  void cancelReservation() {
+  
+    int ID;
+    int PatientLocation;
+  
+    printf(" Enter Your ID .\n");
+    scanf("%d", &ID);
+    PatientLocation = searchPatientID(ID);
+    
+    if (PatientLocation !=-1)
+    {
+      printf("User existed .\n");
+      for (int d = 0; d < DAYS_IN_WEEK; d++) 
+      {
+        for (int s = 0; s < SLOTS_PER_DAY; s++)
+        {
+          if (busySlots[d][s]==ID)
+          {
+  
+                 busySlots [d] [s] = 0;
+               availableSlots[d][s] = 1;
+              deletepatientdata (PatientLocation);
+          }
+        }
+      }
+      }
+  
+    else
+    {
+      printf("User not found");
+    }
+  
+  }
 
 
 void UserMood()
@@ -328,15 +365,86 @@ void viewReservations()
 {
 //Rawda
 }
-int checkpatientresearve(int patientID)
+int searchPatientID(int ID)
 {
-    //amir
-    return 0 ;
+  for (int i = 0; i < MAX_PATIENTS; i++) {
+
+      if ((patients[i].patientID) ==ID) {
+      return (i);
+    }
+  }
+    return -1;
 }
+
+int checkpatientresearve(int patientID) {
+
+  int PatientLocation;
+  PatientLocation = searchPatientID(patientID);
+
+  if (PatientLocation != -1)
+  {
+    printf("User existed .\n");
+    for (int d = 0; d < DAYS_IN_WEEK; d++)
+    {
+      for (int s = 0; s < SLOTS_PER_DAY; s++)
+      {
+        if (busySlots[d][s] == patientID)
+        {
+          return 1;
+          
+        }
+      }
+    }
+  }
+
+  else
+  {
+    printf("User not found");
+    return 0;
+  }
+
+}
+//======================================================new patient============================================================
 void NewPatient()
 {
-//Omar
+    if(patientCount<35&&slotCount<35)
+    {
+         printf("Entering new patient data:\n");
+
+         printf("Enter name:\n");
+         fflush(stdin);
+         gets(patients[patientCount].name);
+
+         printf("Enter age:\n");
+         scanf("%i",&patients[patientCount].age);
+
+         printf("Enter gender:\n");
+         fflush(stdin);
+         gets(patients[patientCount].gender);
+
+         printf("Enter ID:\n");
+         int id;
+         scanf("%i",&id);
+         if(!(searchPatient(id)-1))
+         {
+            patients[patientCount].patientID=id;
+            printf("Patient data successfully added!!\n");
+            patientCount++;
+         }
+         else
+        {
+            printf("ID already exists!!\n");
+            return;
+        }
+
+    }
+
+    else
+    {
+        printf("Maximum weekly capacitance reached!!\n");
+    }
 }
+//==============================================================Existing Patient ====================================================
 //Eslam
 void ExistingPatient()
 {
@@ -345,7 +453,7 @@ void ExistingPatient()
 
   printf(" Enter Your ID .\n");
   scanf("%d",&ID);
-  PatientLocation=searchPatient( ID);
+  PatientLocation=searchPatient( ID);//  PatientLocation=searchPatient(ID)-1;
   if(PatientLocation==0)
   {
     printf(" We don't have this ID ");
