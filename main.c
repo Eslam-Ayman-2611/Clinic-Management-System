@@ -85,9 +85,9 @@ void adminMenu()
         switch(choice)
         {
             case 1: reserveSlot(); break;
-            case 2: editPatientRecord();choice=4; break;
-            case 3: cancelReservation();choice=4; break;
-            case 4: UserMood(); choice=4; break;
+            case 2: editPatientRecord(); break;
+            case 3: cancelReservation(); break;
+            case 4: UserMood(); Home_Menu(); break;
             case 5: printf("Logging out...\n"); break;
             default: printf("Invalid choice. Try again.\n");
         }
@@ -303,22 +303,22 @@ void cancelReservation() {
                  availableSlots[d][s] = 1;
                  slotCount--;
                  deletepatientdata (PatientLocation);
+                 printf(" We canceled your slot and deleted your data .\n");
             }
           }
         }
- 
       }
       else 
       {
         while(flag==0)
         {
-                for (int d = 0; d < DAYS_IN_WEEK; d++) 
+            for (int d = 0; d < DAYS_IN_WEEK; d++) 
             {
               for (int s = 0; s < SLOTS_PER_DAY; s++)
               {
 
                   if (busySlots[d][s]==ID)
-                 {
+                {
                     if(flag==0)
                     {
                         flag=1;
@@ -328,11 +328,13 @@ void cancelReservation() {
                         busySlots [d] [s] = 0;//
                         availableSlots[d][s] = 1;
                         slotCount--;
+                        patients[PatientLocation].consult_flag=0;
+                        printf(" We canceled your consultation .\n");
                     }
-                  }
                 }
+              }
             }
-        patients[PatientLocation].consult_flag=0;
+         patients[PatientLocation].consult_flag=0;
         }
       }
 
@@ -400,23 +402,41 @@ void viewPatientRecord()
 //==Rawda====================================================== view Reservations ============================================================
 void viewReservations()
 {
-  printf("Today's Reservations with patints ID and Time Slot:\n");
+    int day;
+    printf("Enter the day number : \n1 for Sat. \n2 for Sun. \n3 for Mon. \n4  for Tues.\n5 for Wed. \n6  for Thu. \n7 for Fri.): ");
+    scanf("%d", &day);
+    day--; 
 
-   int flag = 0;  //<There is no Reservation if flag =0 >  < flag=1___Reservation >
-
-    for (int day = 0; day < DAYS_IN_WEEK; day++)
+    if (day < 0 || day > 6) 
+        printf("Invalid day!\n");
+    else   
         {
+             printf("\nReservations for Day %d:\n", day + 1);
+             printf("Today's Reservations with patints ID and Time Slot:\n");
+
+            int flag = 0;  //<There is no Reservation if flag =0 >  < flag=1 Reservation >
+
+  
         for (int slot = 0; slot < SLOTS_PER_DAY; slot++)
         {
             if (busySlots[day][slot] != 0) //<There is Reservation in Day>
-            {
-                flag = 1;
-                printf("Day %d, Slot %d: Patient ID %d\n", day + 1, slot + 1, busySlots[day][slot]);
-            }
+                {
+                    flag = 1;
+                    switch (slot)
+                    {
+                         case 0:  printf("Time: from 2:00 to 2:30  \t"); break;
+                         case 1:  printf("Time: from 2:30 to 3:00  \t"); break;
+                         case 2:  printf("Time: from 3:00 to 3:30  \t"); break;
+                         case 3:  printf("Time: from 4:00 to 4:30  \t"); break;
+                         case 4:  printf("Time: from 4:30 to 5:00  \t"); break;
+                    }
+                   printf(" Patient ID: %d \n", busySlots[day][slot]);
+                 }
         }
-    }
-    if (!flag ) {
-        printf("No reservations for today.\n");
+      if(!flag )
+      {
+         printf("No reservations for today.\n");
+      }  
     }
 }
 //==Amir===========================================================check patient researve ====================================================
@@ -594,3 +614,5 @@ return 1 ;
 }
 return 0 ;
 }
+//============================================================== check ID available ====================================================
+
