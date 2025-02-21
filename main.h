@@ -19,7 +19,13 @@ typedef struct patient_data
 
 //==========================Global arrays============================================
 Patient patients[MAX_PATIENTS];
-int availableSlots[DAYS_IN_WEEK][SLOTS_PER_DAY] = { {1} }; // 1 ->avilable | 0-> busy 
+int availableSlots[DAYS_IN_WEEK][SLOTS_PER_DAY] = { {1,1,1,1,1},
+                                                    {1,1,1,1,1},
+                                                    {1,1,1,1,1},
+                                                    {1,1,1,1,1},
+                                                    {1,1,1,1,1},
+                                                    {1,1,1,1,1},
+                                                    {1,1,1,1,1} }; // 1 ->avilable | 0-> busy 
 int busySlots[DAYS_IN_WEEK][SLOTS_PER_DAY] = { {0000} };      // 0000-> avilable | ID -> busy
 //==========================Global variables============================================
 int patientCount = 0;
@@ -41,5 +47,5 @@ int searchPatientID(int ID);//Amir
 int checkpatientresearve(int patientID);//Amir
 void NewPatient();//omar ==================================== works well
 void ExistingPatient();//Eslam
-void reserveingSlot();//Wating....
+void reserveingSlot(int ID);//Wating....
 int checkIDavailable(int ID);//Eslam========================= works well
