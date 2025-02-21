@@ -104,9 +104,9 @@ int searchPatient(int patientID)
     for (i =0;i<MAX_PATIENTS;i++)
         {
             if (patients[i].patientID==patientID)
-                return (i+1) ;
+                return (i) ;
         }
-return 0 ;
+return -1 ;
 }
 
 // Edit Existing Patient Record
