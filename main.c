@@ -2,8 +2,7 @@
 #include <string.h>
 #include "main.h"
 
-
-// Display Main Menu
+//=Team======================================================  Display Main Menu ===========================================================
 void Home_Menu()
 {
 
@@ -36,8 +35,7 @@ void Home_Menu()
     }while(option!=3);
 
 }
-
-// Admin Login
+//=Omar======================================================  Admin Login ============================================================
 void adminLogin()
 {
     int password;
@@ -67,7 +65,7 @@ void adminLogin()
 
 
 }
-
+//=Team======================================================  Admin Menu ============================================================
 // Admin Menu
 void adminMenu()
 {
@@ -97,7 +95,7 @@ void adminMenu()
     } while(choice != 4);
 
 }
-// Check if Patient Exists
+//=Mohamed======================================================  Reserve a Slot ============================================================
 int searchPatient(int patientID)
 {
     int i;
@@ -108,8 +106,6 @@ int searchPatient(int patientID)
         }
 return -1 ;
 }
-
-// Edit Existing Patient Record
 void editPatientRecord()
 {
      while(1)
@@ -236,8 +232,8 @@ void editPatientRecord()
 //Mohamed
 }
 
-
-// Reserve a Slot
+//=Eslam======================================================  Reserve a Slot ============================================================
+// 
 void reserveSlot()
 {
     if(patientCount<35)
@@ -267,8 +263,7 @@ void reserveSlot()
     }
 
 }
-
-// Cancel a Reservation
+//=Amir======================================================  Cancel a Reservation ============================================================
 void deletepatientdata(int PatientLocation) {
     patients[PatientLocation].age = 0;
     patients[PatientLocation].consult_flag = 0;
@@ -311,7 +306,7 @@ void deletepatientdata(int PatientLocation) {
   
   }
 
-
+//==Eslam====================================================== User mood  ============================================================
 void UserMood()
 {
 
@@ -336,8 +331,7 @@ void UserMood()
     } while(choice != 3);
 
 }
-
-// View Patient Record
+//==Rawda====================================================== View Patient Record ============================================================
 void viewPatientRecord()
 {
 
@@ -360,11 +354,12 @@ void viewPatientRecord()
             printf("THE consult_flag IS: %s\n", (patients[ID ].consult_flag ));
     }
 }
-// View todays's Reservations
+//==Rawda====================================================== view Reservations ============================================================
 void viewReservations()
 {
 //Rawda
 }
+//==Amir===========================================================check patient researve ====================================================
 int searchPatientID(int ID)
 {
   for (int i = 0; i < MAX_PATIENTS; i++) {
