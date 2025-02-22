@@ -32,21 +32,21 @@ int patientCount = 0;
 int slotCount = 0;
 
 //==========================Functions Declrations============================================
-void Home_Menu();//Team 
-void adminLogin();//Omar&Eslam
-void adminMenu();//Team
-int searchPatient(int patientID);//mohamed
+void Home_Menu();//Team ========================= works well
+void adminLogin();//Omar&Eslam ========================= works well
+void adminMenu();//Team ========================= works well
+int searchPatient(int patientID);//mohamed ========================= works well
 void editPatientRecord();//Mohamed
 void reserveSlot();//Eslam&omar
 void deletepatientdata(int PatientLocation);//Amir
 void cancelReservation();//Amir
-void UserMood();//Team
+void UserMood();//Team========================= works well
 void viewPatientRecord();//rawda ============================ works well
-void viewReservations();//rawda
+void viewReservations();//rawda ========================= works well
 int checkpatientresearve(int patientID);//Amir
 void NewPatient();//omar ==================================== works well
-int FirstEmptyIndex();//omar
+int FirstEmptyIndex();//omar========================= works well
 void ExistingPatient();//Eslam
 void reserveingSlot(int ID);//Eslam
 int checkIDavailable(int ID);//Eslam========================= works well
-void printpatientdata(int ID);
+void printpatientdata(int ID);//Rawda========================= works well
