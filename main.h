@@ -49,4 +49,4 @@ int FirstEmptyIndex();//omar
 void ExistingPatient();//Eslam
 void reserveingSlot(int ID);//Eslam
 int checkIDavailable(int ID);//Eslam========================= works well
-void printpatientdata(ID);
+void printpatientdata(int ID);
