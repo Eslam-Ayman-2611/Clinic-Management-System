@@ -3,6 +3,7 @@
 #define MAX_SLOTS 35
 #define DAYS_IN_WEEK 7
 #define SLOTS_PER_DAY 5
+#define price 200
 
 //===================== Structs=======================================================
 
