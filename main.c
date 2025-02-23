@@ -107,21 +107,18 @@ return -1 ;
 }
 void editPatientRecord()
 {
-// int Back_choice;        
-int exit_flag = 0;
-     while(!exit_flag)
+   int Back_choice;
+   int exit_flag = 0;
+     while(exit_flag==0)
     {
-        int ID , Index;
-        int choice;
-        int i,j;
+        int ID,Index;
         //////////////////////////////
         printf("Welcom to Edit mode....\n");
         printf("please enter the ID..\n");
         scanf("%i",&ID);
-
         Index=searchPatient(ID);
-
-         if(Index!=1)
+        //////////////////////////////
+         if(Index>-1)
          {
              printf("Patient details....\n");
              printpatientdata(Index);
@@ -134,145 +131,94 @@ int exit_flag = 0;
              printf("5. All \n");
              printf("6. Exit \n");
              printf("your choice is : \n");
+             int choice;
              scanf("%i",&choice);
             /////////////////////////////////////////////////
-
             switch(choice)
             {
             case 1:
                 printf("New Name is:\n");
                 fflush(stdin);
                 gets(patients[Index].name);
-                printpatientdata(Index);
-                exit_flag = 1;
-                break;
-                ///////////////////////////////////////////
-            case 2:
-                printf("New Age is:\n");
-                scanf("%i",&patients[Index].age);
                 printf("update Patient details....\n");
                 printpatientdata(Index);
                 exit_flag = 1;
                 break;
+             //********************************************* //
+            case 2:
+                 printf("New Age is:\n");
+                scanf("%i",&patients[Index].age);
 
+                printf("update Patient details....\n");
+                printpatientdata(Index);
+                exit_flag = 1;
+                break;
+            //********************************************* //
             case 3:
                 printf("New Gender is:\n");
-                fflush(stdin);
-                gets(patients[Index].gender);
+               fflush(stdin);
+               gets(patients[Index].gender);
+
+
                 printf("update Patient details....\n");
                 printpatientdata(Index);
                 exit_flag = 1;
                 break;
-
+            //********************************************* //
             case 4:
-
-               for (int i = 0; i < DAYS_IN_WEEK; i++)
-                {
-                 for (int j = 0; j < SLOTS_PER_DAY; j++){
-
-                        if (availableSlots[i][j]==1 && busySlots[i][j]==0)
-                        {
-                                availableSlots[i][j]==0;
-                                busySlots[i][j]==1;
-                                reserveingSlot(ID);
-
-                                printf("Patient details....\n");
-                                printpatientdata(Index);
-                                printf("Reservation has  changed...\n");
-                                exit_flag = 1;
-                                break;
-                        }
-
-                        else
-                        {
-                                printf("sorry, There are no slots empty \n");
-                                printf("Patient details....\n");
-                                printpatientdata(Index);
-                                printf("Reservation has not changed...\n");
-                                exit_flag = 1;
-                                break;
-                        }
-          }
-           break;
-          }
-          break;
-                ////////////////////////////////////////////
+                  printf("Editing main Reservation:\n");
+                  editReserve(ID,Index);
+                  exit_flag=1;
+                  break;
+            //******************************************* //
             case 5:
                 printf("New Name is:\n");
                 fflush(stdin);
                 gets(patients[Index].name);
-               //////////////////////////
+           //////////////////////////////////////////
                 printf("New Age is:\n");
                 scanf("%i",&patients[Index].age);
-                //////////////////////////////
+           ////////////////////////////////////////
                 printf("New Gender is:\n");
                  fflush(stdin);
                 gets(patients[Index].gender);
-                //////////////////////////////////
-
-                   for (int i = 0; i < DAYS_IN_WEEK; i++)
-          {
-                 for (int j = 0; j < SLOTS_PER_DAY; j++){
-
-            if (availableSlots[i][j]==1 && patients[Index].patientID==ID)
-            {
-               reserveingSlot(ID);
-               printf("\n Reservation has changed...\n\n");
-               exit_flag = 1;
-               break;
-            }
-            else
-            {
-                printf("\n sorry, There are no slots empty \n\n");
+                /////////////////////////////////////
+                printf("Editing main Reservation:\n");
+                editReserve(ID , Index );
+          /////////////////////////////////////////////////////////
                 exit_flag = 1;
                 break;
-            }
-          }
-           break;
-          }
-              //////////////////////////////////////////////////
-                printf("update Patient details....\n");
-                printpatientdata(Index);
-                exit_flag = 1;
-                break;
-                ////////////////////////////////////////////
+          //********************************************* //
             case 6:
                 printf("Exiting Edit Mode...\n");
+                adminMenu();
                 exit_flag = 1;
                 break;
-
-               ////////////////////////////////////////////
+        //********************************************* //
 
             default:
                 printf("invalid choice , Try again \n");
                 continue;
             }
+
+
          }
 
-        else
+            else
         {
-            printf(" sorry , The ID is not exist \n");
-            break;
-        }   
 
-          if (exit_flag) {             // if True (1)
-                           break;
-                          }
+                printf(" sorry , The ID is not exist \n");
+                break;
+
+        }
+
+
     }
-    // printf("To Back to Admin menu enter 1 \n");
-    // scanf("%i",&Back_choice);
-    // if(1==Back_choice)
-    // {
-    //     adminMenu();
-    // }
-    // else
-    // {
-    //     printf("Thanks to use the app.........");
-    // }
+//Mohamed
 }
 
 //=Eslam======================================================  Reserve a Slot ============================================================
-// 
+//
 void reserveSlot()
 {
     if(patientCount<35)
@@ -303,15 +249,17 @@ void reserveSlot()
 
 }
 //=Amir======================================================  Cancel a Reservation ============================================================
-void deletepatientdata(int PatientLocation) {
+void deletepatientdata(int PatientLocation)
+{
     patients[PatientLocation].age = 0;
     patients[PatientLocation].patientID= 0;
     strcpy(patients[PatientLocation].gender, "");
     strcpy(patients[PatientLocation].name, "");
     patientCount--;
-  }
-  
-void cancelReservation() {
+}
+
+void cancelReservation()
+{
 
     int ID;
     int PatientLocation;
@@ -319,17 +267,17 @@ void cancelReservation() {
     printf(" Enter Your ID .\n");
     scanf("%d", &ID);
     PatientLocation = searchPatient(ID);
-    
+
     if (PatientLocation !=-1)
     {
       printf("User existed .\n");
       if(patients[PatientLocation].consult_flag==0)
       {
-        for (int d = 0; d < DAYS_IN_WEEK; d++) 
+        for (int d = 0; d < DAYS_IN_WEEK; d++)
         {
           for (int s = 0; s < SLOTS_PER_DAY; s++)
           {
-  
+
             if (busySlots[d][s]==ID)
             {
                  busySlots [d] [s] = 0;//
@@ -341,11 +289,11 @@ void cancelReservation() {
           }
         }
       }
-      else 
+      else
       {
         while(flag==0)
         {
-            for (int d = 0; d < DAYS_IN_WEEK; d++) 
+            for (int d = 0; d < DAYS_IN_WEEK; d++)
             {
               for (int s = 0; s < SLOTS_PER_DAY; s++)
               {
@@ -356,7 +304,7 @@ void cancelReservation() {
                     {
                         flag=1;
                     }
-                    else 
+                    else
                     {
                         busySlots [d] [s] = 0;//
                         availableSlots[d][s] = 1;
@@ -372,12 +320,12 @@ void cancelReservation() {
       }
 
       }
-  
+
     else
     {
       printf("User not found");
     }
-  
+
   }
 
 //==Eslam====================================================== User mood  ============================================================
@@ -422,7 +370,7 @@ void viewPatientRecord()
         {
             printf("The Basic Information Of The Patient`s IS : \n");
             printpatientdata(ID);
-        
+
         }
 }
 //==Rawda====================================================== view Reservations ============================================================
@@ -431,18 +379,18 @@ void viewReservations()
     int day;
     printf("Enter the day number : \n1 for Sat. \n2 for Sun. \n3 for Mon. \n4  for Tues.\n5 for Wed. \n6  for Thu. \n7 for Fri.): ");
     scanf("%d", &day);
-    day--; 
+    day--;
 
-    if (day < 0 || day > 6) 
+    if (day < 0 || day > 6)
         printf("Invalid day!\n");
-    else   
+    else
         {
              printf("\nReservations for Day %d:\n", day + 1);
              printf("Today's Reservations with patints ID and Time Slot:\n");
 
             int flag = 0;  //<There is no Reservation if flag =0 >  < flag=1 Reservation >
 
-  
+
         for (int slot = 0; slot < SLOTS_PER_DAY; slot++)
         {
             if (busySlots[day][slot] != 0) //<There is Reservation in Day>
@@ -462,12 +410,13 @@ void viewReservations()
       if(!flag )
       {
          printf("No reservations for today.\n");
-      }  
+      }
     }
 }
 //==Amir===========================================================check patient researve ====================================================
 
-int checkpatientresearve(int patientID) {
+int checkpatientresearve(int patientID)
+{
 
   int PatientLocation;
   PatientLocation = searchPatient(patientID);
@@ -522,11 +471,26 @@ void NewPatient()
             scanf("%i",&id);
             if(checkIDavailable(id)==1)
             {
+
+
+                printf("Did user pay %i $?:\n if No, press 0\n if Yes, press any thing else\n",price);
+                int cost_flag=0;
+                scanf("%i",&cost_flag);
+              if(cost_flag!=0)
+              {
+               printf("User paid %i $!!\n",price);
                patients[index].patientID=id;
                reserveingSlot(id);
                printf("Patient data successfully added!!\n");
                patientCount++;
                flag++;
+              }
+              else
+              {
+                  flag=1;
+                  printf("No data added for this user!\n");
+              }
+
             }
             else
             {
@@ -575,10 +539,11 @@ void ExistingPatient()
     {
     printf(" You already recorded slot and consultation ");
     }
-    else 
+    else
     {
-        patients[PatientLocation].consult_flag=1;
         reserveingSlot(ID);
+        patients[PatientLocation].consult_flag=1;
+        printf("Consultation is for free!\n");
     }
   }
 }
@@ -586,12 +551,12 @@ void ExistingPatient()
 
 void reserveingSlot(int ID )
 {
-int day =0 , slot = 0 , counter =0 , flag =0  ;
+    int day =0 , slot = 0 , counter =0 , flag =0  ;
     if(slotCount>=35)
      {
         printf(" NO slots available in this week ");
      }
-    else 
+    else
     {
         do
         {
@@ -608,11 +573,11 @@ int day =0 , slot = 0 , counter =0 , flag =0  ;
                 {
                     printf("Invalid day! Please choose between 1 and 7.\n");
                     continue;
-                }        
+                }
                 ////////////////////////////////////////////////////////////
                 counter=0;
                 printf(" Empty slots : \n");
-                if(availableSlots[day-1][0]==1)           
+                if(availableSlots[day-1][0]==1)
                                 {printf(" 1- 2:00 to 2:30   \n");counter++;}
                 if(availableSlots[day-1][1]==1)
                                 {printf(" 2- 2:30 to 3:00   \n");counter++;}
@@ -628,20 +593,20 @@ int day =0 , slot = 0 , counter =0 , flag =0  ;
                 else
                 {
                     printf(" choose one of these %i slots ",counter);
-                    scanf("%d",&slot); 
+                    scanf("%d",&slot);
                     if(slot>5||slot<1||availableSlots[day-1][slot - 1] == 0)
                     {
                         printf("invalid slot\n");
-                    }                    
+                    }
                     else
                     {
                         availableSlots[day-1][slot-1]=0;
-                        busySlots[day-1][slot-1]=ID;  
-                        slotCount++; 
+                        busySlots[day-1][slot-1]=ID;
+                        slotCount++;
                         flag=1;
                         if(patients[searchPatient(ID)].consult_flag==1)
                         {
-                          int bookFlag=0;  
+                          int bookFlag=0;
                         for(int day0 = 0 ; day0< DAYS_IN_WEEK;day0++)
                             {
                                 for(int slot0=0 ; slot0 < SLOTS_PER_DAY ;slot0++ )
@@ -668,13 +633,14 @@ int day =0 , slot = 0 , counter =0 , flag =0  ;
                         }
                     }
                 }
-                
+
         } while(flag==0);
     }
 }
 //==Eslam============================================================ check ID available ====================================================
 
-int checkIDavailable(int ID){
+int checkIDavailable(int ID)
+{
 if(ID>=1000&&ID<=9999)
 {
     for(int i =0 ; i<patientCount;i++)
@@ -688,9 +654,9 @@ return 1 ;
 }
 return 0 ;
 }
-//Rawda============================================================== print patient data ====================================================
-void printpatientdata(ID)
-    {
+//============================================================== print patient data ====================================================
+void printpatientdata(int ID)
+{
         printf("The Name is: %s\n", patients[ID].name);
         printf("The Gender is: %s\n", patients[ID].gender);
         printf("The Age is: %d\n", patients[ID].age);
@@ -699,4 +665,30 @@ void printpatientdata(ID)
             printf("Consultation Reserved \n");
         else
             printf("No consultation Reserved \n");
-    }
+}
+//============================================================== edit Reserve =============================================================
+void editReserve(int ID, int Index)
+ {
+      for (int i = 0; i < DAYS_IN_WEEK; i++)
+          {
+                 for (int j = 0; j < SLOTS_PER_DAY; j++)
+            {
+
+          if (busySlots[i][j]==ID)
+         {
+             reserveingSlot(ID);
+             availableSlots[i][j]=1;
+             busySlots[i][j]=0;
+             slotCount--;
+             ////////////////////////
+             printf("Patient details....\n");
+             printpatientdata(Index);
+             printf("Reservation has  changed....\n");
+             break;
+         }
+
+           }
+
+          }
+
+ }
