@@ -379,23 +379,28 @@ void viewReservations()
     int day;
     printf("Enter the day number : \n1 for Sat. \n2 for Sun. \n3 for Mon. \n4  for Tues.\n5 for Wed. \n6  for Thu. \n7 for Fri.): ");
     scanf("%d", &day);
-    day--;
+    day--; 
 
-    if (day < 0 || day > 6)
+    if (day < 0 || day > 6) 
         printf("Invalid day!\n");
-    else
-        {
+    else   
+          {  printf("Today's Reservations with patints ID and Time Slot :\n");
              printf("\nReservations for Day %d:\n", day + 1);
-             printf("Today's Reservations with patints ID and Time Slot:\n");
+             printf("-------------------------------------------------\n");
+             printf("|       Time Slot        |     Patient ID       |\n");
+             printf("-------------------------------------------------\n"); 
+        
+             
 
             int flag = 0;  //<There is no Reservation if flag =0 >  < flag=1 Reservation >
 
-
+  
         for (int slot = 0; slot < SLOTS_PER_DAY; slot++)
         {
             if (busySlots[day][slot] != 0) //<There is Reservation in Day>
                 {
                     flag = 1;
+                    printf("| ");
                     switch (slot)
                     {
                          case 0:  printf("Time: from 2:00 to 2:30  \t"); break;
@@ -404,13 +409,14 @@ void viewReservations()
                          case 3:  printf("Time: from 4:00 to 4:30  \t"); break;
                          case 4:  printf("Time: from 4:30 to 5:00  \t"); break;
                     }
-                   printf(" Patient ID: %d \n", busySlots[day][slot]);
+                        printf("|        %d        |\n", busySlots[day][slot]);
                  }
         }
       if(!flag )
       {
-         printf("No reservations for today.\n");
-      }
+                       printf("|     No reservations for today.               |\n");
+        }
+                       printf("-------------------------------------------------\n");
     }
 }
 //==Amir===========================================================check patient researve ====================================================
@@ -655,17 +661,19 @@ return 1 ;
 return 0 ;
 }
 //============================================================== print patient data ====================================================
-void printpatientdata(int ID)
+void printpatientdata(ID)
 {
-        printf("The Name is: %s\n", patients[ID].name);
-        printf("The Gender is: %s\n", patients[ID].gender);
-        printf("The Age is: %d\n", patients[ID].age);
-        printf("The ID is : %d\n", patients[ID].patientID);
-        if(patients[ID ].consult_flag==1)
-            printf("Consultation Reserved \n");
-        else
-            printf("No consultation Reserved \n");
+    printf("\n----------------------------------------\n");
+    printf("| Details           | Value            |\n");
+    printf("----------------------------------------\n");
+    printf("| ID               | %d              |\n", patients[ID].patientID);
+    printf("| Name             | %-15s |\n", patients[ID].name);
+    printf("| Age              | %d              |\n", patients[ID].age);
+    printf("| Gender           | %-10s     |\n", patients[ID].gender);
+    printf("| Consultation     | %-10s     |\n", (patients[ID].consult_flag == 1) );
+    printf("----------------------------------------\n");
 }
+
 //============================================================== edit Reserve =============================================================
 void editReserve(int ID, int Index)
  {
