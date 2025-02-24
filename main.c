@@ -478,11 +478,19 @@ void NewPatient()
             if(checkIDavailable(id)==1)
             {
 
+<<<<<<< HEAD
                 printf("Did user pay %i $?:\nif Yes, Enter 1 \n if No, press any thing else \n",price);
                 int cost_flag=0;
 
               scanf("%i",&cost_flag);
               if(cost_flag==1)
+=======
+
+                printf("Did user pay %i $?:\n if No, press 0\n if Yes, press any thing else\n",price);
+                int cost_flag=0;
+                scanf("%i",&cost_flag);
+              if(cost_flag!=0)
+>>>>>>> 8b1e3caf6df9390a0b6ce1f78b69b58a0f60999d
               {
                printf("User paid %i $!!\n",price);
                patients[index].patientID=id;
@@ -620,7 +628,11 @@ void reserveingSlot(int ID )
                                     if (bookFlag==1) continue;
                                     if(busySlots[day0][slot0]==busySlots[day-1][slot-1])
                                     {
+<<<<<<< HEAD
                                         if(day-1>day0)
+=======
+                                        if((day-1>day0)||(day-1==day0&&slot-1>slot0)||!((day-1==day0&&slot-1==slot0)))
+>>>>>>> 8b1e3caf6df9390a0b6ce1f78b69b58a0f60999d
                                             printf(" your consultation booked ");
                                             flag=1;
                                     }
@@ -664,6 +676,7 @@ return 0 ;
 void printpatientdata(ID)
 {
     printf("\n----------------------------------------\n");
+<<<<<<< HEAD
     printf("| Details          | Value            |\n");
     printf("----------------------------------------\n");
     printf("| ID               | %d              |\n",patients[ID].patientID);
@@ -673,6 +686,18 @@ void printpatientdata(ID)
     printf("| Consultation     | %-13s     |\n",patients[ID].consult_flag );
     printf("----------------------------------------\n");
 }
+=======
+    printf("| Details           | Value            |\n");
+    printf("----------------------------------------\n");
+    printf("| ID               | %d              |\n", patients[ID].patientID);
+    printf("| Name             | %-15s |\n", patients[ID].name);
+    printf("| Age              | %d              |\n", patients[ID].age);
+    printf("| Gender           | %-10s     |\n", patients[ID].gender);
+    printf("| Consultation     | %-10s     |\n", (patients[ID].consult_flag == 1) );
+    printf("----------------------------------------\n");
+}
+
+>>>>>>> 8b1e3caf6df9390a0b6ce1f78b69b58a0f60999d
 //============================================================== edit Reserve =============================================================
 void editReserve(int ID, int Index)
  {
