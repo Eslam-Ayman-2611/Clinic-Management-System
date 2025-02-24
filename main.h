@@ -2,11 +2,7 @@
 #define MAX_PATIENTS 35
 #define MAX_SLOTS 35
 #define DAYS_IN_WEEK 7
-<<<<<<< HEAD
 #define SLOTS_PER_DAY 5
-=======
-#define SLOTS_PER_DAY 5
->>>>>>> 8b1e3caf6df9390a0b6ce1f78b69b58a0f60999d
 #define price 200
 
 //===================== Structs=======================================================
@@ -38,17 +34,10 @@ int patientCount = 0;
 int slotCount = 0;
 
 //==========================Functions Declrations============================================
-<<<<<<< HEAD
-void Home_Menu();//Team
-void adminLogin();//Omar&Eslam
-void adminMenu();//Team
-int searchPatient(int patientID);//mohamed
-=======
 void Home_Menu();//Team ========================= works well
 void adminLogin();//Omar&Eslam ========================= works well
 void adminMenu();//Team ========================= works well
 int searchPatient(int patientID);//mohamed ========================= works well
->>>>>>> 8b1e3caf6df9390a0b6ce1f78b69b58a0f60999d
 void editPatientRecord();//Mohamed
 void reserveSlot();//Eslam&omar
 void deletepatientdata(int PatientLocation);//Amir
@@ -62,10 +51,5 @@ int FirstEmptyIndex();//omar========================= works well
 void ExistingPatient();//Eslam
 void reserveingSlot(int ID);//Eslam
 int checkIDavailable(int ID);//Eslam========================= works well
-<<<<<<< HEAD
-void printpatientdata(int ID);//
-////////////////////////////////
 void editReserve(int ID , int Index );//mohamed
-=======
 void printpatientdata(int ID);//Rawda========================= works well
->>>>>>> 8b1e3caf6df9390a0b6ce1f78b69b58a0f60999d
