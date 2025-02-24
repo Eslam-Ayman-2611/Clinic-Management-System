@@ -337,8 +337,9 @@ void UserMood()
     {
         printf("\n User  Menu\n");
         printf("1. view Patient Record \n");
-        printf("2. view Reservations \n");
-        printf("3. Logout\n");
+        printf("2. view Reservations in day  \n");
+        printf("3. view all Reservations in week \n");
+        printf("4. Logout\n");
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -347,10 +348,11 @@ void UserMood()
         {
             case 1: viewPatientRecord(); break;
             case 2: viewReservations(); break;
-            case 3: printf("Logging out...\n"); break;
+            case 3: PrintAllSlots(); break;
+            case 4: printf("Logging out...\n"); break;
             default: printf("Invalid choice. Try again.\n");
         }
-    } while(choice != 3);
+    } while(choice != 4);
 
 }
 //==Rawda====================================================== View Patient Record ============================================================
@@ -700,3 +702,18 @@ void editReserve(int ID, int Index)
           }
 
  }
+//============================================================== edit Reserve =============================================================
+ void PrintAllSlots()
+ {    printf("\n|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|\n");
+    printf("| Slot / Day      |     Saturday   |     Sunday     |     Monday     |    Tuesday     |    Wednesday   |     Thursday   | Friday         |\n");
+    printf("|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|\n");
+    const char *timeSlots[5] = {"2:00 to 2:30", "2:30 to 3:00", "3:00 to 3:30", "4:00 to 4:30", "4:30 to 5:00"};
+    
+    for(int day = 0 ; day < 5 ; day++ ) {
+        printf("| %-14s |", timeSlots[day]);
+        for (int slot = 0; slot < 7 ; slot++ ) {
+            printf(" %-14s |", busySlots[day][slot]);
+        }
+        printf("\n|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|\n");
+    }
+}

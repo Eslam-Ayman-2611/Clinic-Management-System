@@ -53,3 +53,4 @@ void reserveingSlot(int ID);//Eslam
 int checkIDavailable(int ID);//Eslam========================= works well
 void editReserve(int ID , int Index );//mohamed
 void printpatientdata(int ID);//Rawda========================= works well
+void PrintAllSlots();//eslam
