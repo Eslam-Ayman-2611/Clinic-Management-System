@@ -1,3 +1,0 @@
-#!/bin/bash
-gcc -w final.c -o final_program && ./final_program
-
