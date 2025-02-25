@@ -1,3 +1,8 @@
+//===================== Library =======================================================
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <time.h>
 //===================== Pre_Defined Macros =======================================================
 #define MAX_PATIENTS 35
 #define MAX_EMERGENCY 14
