@@ -83,16 +83,17 @@ void Home_Menu()
     }while(option!=3);
     
 }
-//=Omar======================================================  Admin Login ============================================================
+//=eslam======================================================  Admin Login ============================================================
 void Admin_Login() {
-    int password ;
+    const char correct_password [10]="Engs.5#";
+    char input_password [10];
     int attempts = 0;
     
     while (attempts < 6) {
         printf(" Enter password : ");
-        fflush(stdout);
-        scanf("%d",&password);
-        if (password== 4444) {
+        getchar();
+        fgets(input_password,10,stdin);
+        if ((memcmp(input_password,correct_password,7)==0)) {
             printf("Admin mode accessed!\n");
             Admin_Menu();
         } 
@@ -606,47 +607,7 @@ void Choose_Slot(int ID )
 
         } while(flag==0);
     }
-}//==Eslam============================================================ check ID available ====================================================
-
-// else
-// {
-//     availableSlots[day-1][slot-1]=0;
-//     busySlots[day-1][slot-1]=ID;
-//     slotCount++;
-//     flag=0;
-//     if(patients[Search_Patient(ID)].consult_flag==1)
-//     {
-
-//           for(int day0 = 0 ; day0< DAYS_IN_WEEK;day0++)
-//              {
-//             for(int slot0=0 ; slot0 < SLOTS_PER_DAY ;slot0++ )
-//             {
-//                 if(bookFlag==0)
-//                 {
-//                 if(busySlots[day0][slot0]==ID)
-//                 {
-//                     if((day-1)>day0)
-//                     {
-//                         printf(" your consultation booked ");
-//                         flag=1;
-//                         bookFlag=1;
-//                      }
-//                      else
-//                      {
-//                          busySlots[day-1][slot-1]=0;
-//                          availableSlots[day-1][slot-1]=1;
-//                          slotCount--;
-//                          flag=0;
-//                          printf(" you can't book consultation in this slot ");
-//                          printf(" choose another slot ");
-//                          bookFlag=1;
-//                      }
-//                 }
-//             }
-//             }
-//     }
-// }
-// }
+}
 //==Eslam============================================================ check ID available ====================================================
 
 int Check_ID_Available(int ID)

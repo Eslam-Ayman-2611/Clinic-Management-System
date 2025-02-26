@@ -14,8 +14,8 @@
 #define SLOTS_PER_DAY 5
 #define Emergency_SLOTS_PER_DAY 2
 #define price 200
-#define SHA256_BLOCK_SIZE 32
-#define PASSWORD 5555
+
+
 
 //===================== Structs=======================================================
 
