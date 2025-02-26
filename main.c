@@ -1,6 +1,6 @@
 #include"User.c"
 
-int main()
+int main() 
 { 
     char flag = '1';
     while (flag != '0') 
@@ -12,4 +12,4 @@ int main()
         scanf(" %c", &flag); 
     }
     return 0;
-}
+}  

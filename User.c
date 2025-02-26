@@ -102,7 +102,6 @@ void view_Day_Reservations() {
     printf("-------------------------------------------------\n");
 }
 
-
 //============================================================== print patient data ====================================================
 void Print_Patient_Data(int ID) 
 {
@@ -145,24 +144,27 @@ void Print_All_Emergency_Slots_Week(int EmergencySlots[Emergency_SLOTS_PER_DAY][
     }
 }
 //============================================================== Print_All_Slots_Week =============================================================
-void Print_All_Slots_Week()
-{
+void Print_All_Slots_Week() {
     printf("\n========================================================================================================================================\n");
     printf("\n|                                                             Weekly slots                                                             |\n");
     printf("\n========================================================================================================================================\n");
     printf("| Slot / Day     |     Saturday   |     Sunday     |     Monday     |    Tuesday     |    Wednesday   |     Thursday   |     Friday     |\n");
     printf("|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|\n");
+
     const char timeSlots[5][13] = {"2:00 to 2:30", "2:30 to 3:00", "3:00 to 3:30", "4:00 to 4:30", "4:30 to 5:00"};
     
     for (int slot = 0; slot < 5; slot++) {
         printf("| %-14s |", timeSlots[slot]);
         for (int day = 0; day < 7; day++) {
-            if (busySlots[slot][day])
-                printf(" %-14d |", busySlots[slot][day]); 
+            if (busySlots[day][slot]) 
+            {
+                printf(" %-14d |", busySlots[day][slot]);
+            } 
             else 
-                printf(" %-14s |", "Available"); 
+            {  
+                printf(" %-14s |", "Available");
+            }
         }
         printf("\n|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|\n");
     }
-
 }

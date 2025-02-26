@@ -5,8 +5,6 @@
 #include <time.h>
 #include <ctype.h>
 #include <stdlib.h>
-// #include <openssl/sha.h>
-// #include <sha.h>
 
 //===================== Pre_Defined Macros =======================================================
 #define MAX_PATIENTS 35

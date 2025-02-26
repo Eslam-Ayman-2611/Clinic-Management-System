@@ -199,10 +199,10 @@ void New_Patient()
 
          do
          {
-            printf("\nEntering new patient data:\n");
-            printf("*\a Note that:  not started whith 0\n");
+            printf("\nEntering new patient data:\n\n");
+            printf("*\a Note that:  not started whith 0");
             printf("\n1-ID must contain 4 numbers");
-            printf("\n2-ID must be unique");
+            printf("\n2-ID must be unique\n\n");
             printf(" Enter ID:\n");
             scanf("%i",&id);
             clear_input_buffer();
@@ -218,7 +218,7 @@ void New_Patient()
               
               if(Cost_flag=='1')
               {
-               printf("\nUser paid %i $!!\n",price);
+               printf("\nUser paid %i $!!\n\n\n",price);
                patients[index].patientID=id;
                /////////////////////////
                 Input_Valid_Name(index);
@@ -503,17 +503,17 @@ void Existing_Patient()
     }
     else
     {   Clear_Screen();
-        Choose_Slot(ID);
         patients[PatientLocation].consult_flag=1;
+        Choose_Slot(ID);
         printf("Consultation is for free!\n");
     }
   }
 }
 //============================================================== reserveing Slot ====================================================
-
 void Choose_Slot(int ID )
 {
     int day =0 , slot = 0 , counter =0 , flag =0  ;
+    int bookFlag=0;
     if(slotCount>=35)
      {
         printf(" NO slots available in this week ");
@@ -569,20 +569,22 @@ void Choose_Slot(int ID )
                         busySlots[day-1][slot-1]=ID;
                         slotCount++;
                         flag=1;
+                         bookFlag=0;
                         if(patients[Search_Patient(ID)].consult_flag==1)
                         {
-                          int bookFlag=0;
+
                         for(int day0 = 0 ; day0< DAYS_IN_WEEK;day0++)
                             {
                                 for(int slot0=0 ; slot0 < SLOTS_PER_DAY ;slot0++ )
                                 {
-                                    if (bookFlag==1) continue;
+                                    if (bookFlag==0){
                                     if(busySlots[day0][slot0]==busySlots[day-1][slot-1])
                                     {
-                                        if(day-1>day0)
+                                    if((day-1)>day0){
                                         // if((day-1>day0)||(day-1==day0&&slot-1>slot0)||!((day-1==day0&&slot-1==slot0)))
                                             printf(" your consultation booked ");
                                             flag=1;
+                                            bookFlag=1;
                                     }
                                     else
                                     {
@@ -596,13 +598,55 @@ void Choose_Slot(int ID )
                                     }
                                 }
                                 }
+                                }
+                                }
                         }
                     }
                 }
 
         } while(flag==0);
     }
-}
+}//==Eslam============================================================ check ID available ====================================================
+
+// else
+// {
+//     availableSlots[day-1][slot-1]=0;
+//     busySlots[day-1][slot-1]=ID;
+//     slotCount++;
+//     flag=0;
+//     if(patients[Search_Patient(ID)].consult_flag==1)
+//     {
+
+//           for(int day0 = 0 ; day0< DAYS_IN_WEEK;day0++)
+//              {
+//             for(int slot0=0 ; slot0 < SLOTS_PER_DAY ;slot0++ )
+//             {
+//                 if(bookFlag==0)
+//                 {
+//                 if(busySlots[day0][slot0]==ID)
+//                 {
+//                     if((day-1)>day0)
+//                     {
+//                         printf(" your consultation booked ");
+//                         flag=1;
+//                         bookFlag=1;
+//                      }
+//                      else
+//                      {
+//                          busySlots[day-1][slot-1]=0;
+//                          availableSlots[day-1][slot-1]=1;
+//                          slotCount--;
+//                          flag=0;
+//                          printf(" you can't book consultation in this slot ");
+//                          printf(" choose another slot ");
+//                          bookFlag=1;
+//                      }
+//                 }
+//             }
+//             }
+//     }
+// }
+// }
 //==Eslam============================================================ check ID available ====================================================
 
 int Check_ID_Available(int ID)
