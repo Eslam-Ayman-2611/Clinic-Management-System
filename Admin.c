@@ -7,11 +7,15 @@ void Wellcome()
     printf("*************************************************\n");
     printf("*          DOCTOR INFORMATION BOARD             *\n");
     printf("*************************************************\n");
+    usleep(300000);
     printf("* Doctor    : Name of Doctor                    *\n");
     printf("* Specialty : Internal Medicine                 *\n");
     printf("*************************************************\n");
+    usleep(300000);
     printf("*              WORKING HOURS                    *\n");
     printf("*************************************************\n");
+    usleep(300000);
+    
     printf("*  1:00 -  1:30  |                              *\n");
     printf("*  1:30 -  2:00  |                              *\n");
     printf("*  2:00 -  2:30  |                              *\n");
@@ -19,14 +23,22 @@ void Wellcome()
     printf("*  3:00 -  3:30  |                              *\n");
     printf("*  4:00 -  4:30  |                              *\n");
     printf("*  4:30 -  5:00  |                              *\n");
+    usleep(300000);
+
     printf("*************************************************\n");
     printf("*              EMERGENCY HOURS                  *\n");
     printf("*************************************************\n");
+    usleep(300000);
+
     printf("*  6:00 -  6:300 |        Emergency             *\n");
     printf("*  6:30 -  7:00  |        Emergency             *\n");
+    usleep(300000);
+
     printf("*************************************************\n");
     printf("* Degree    : Doctorate in Internal Medicine    *\n");
     printf("*************************************************\n");
+    usleep(300000);
+
 }
 
 //=Team======================================================  Display Main Menu ===========================================================
@@ -34,111 +46,250 @@ void Wellcome()
 void Home_Menu()
 {
 
-    int option;
+    short option;
     do
     {
         printf("\tClinic Management System\n");
+    usleep(300000);
         printf("1. Admin Mode\n");
+    usleep(300000);
         printf("2. User mood\n");
+    usleep(300000);
         printf("3. Exit\n");
+    usleep(300000);
         printf("Enter your option: ");
         fflush(stdin);
-        scanf("%i", &option);
-
+        scanf("%hi", &option);
         switch(option)
         {
             case 1:
+                Clear_Screen();
                 Admin_Login();
                 return ;
                 break;
             case 2:
+                Clear_Screen();
                 User_Mood();
                 break;
             case 3:
+                Clear_Screen();
                 printf("you are out of system!!!");
                 option=3;
                 break;
             default:
                 printf("invalid!! please try again!!");
         }
-
+        
     }while(option!=3);
-
+    
 }
 //=Omar======================================================  Admin Login ============================================================
-void Admin_Login()
-{
-    int password;
-    int attempts=0;
-
-    while(attempts<6)
-    {
-    printf("Enter password:\n");
-    fflush(stdin);
-    scanf("%i",&password);
-        if(password==1234)
-        {
-            printf("Admin mode accessed!!");
+void Admin_Login() {
+    int password ;
+    int attempts = 0;
+    
+    while (attempts < 6) {
+        printf(" Enter password : ");
+        fflush(stdout);
+        scanf("%d",&password);
+        if (password== 4444) {
+            printf("Admin mode accessed!\n");
             Admin_Menu();
-            return;
-        }
+        } 
         else
         {
-            printf("incorrect!!try again\n");
+            printf("Incorrect! Try again.\n");
             attempts++;
-            if(attempts==3)
-            {
-                printf(" you Entered incorrect password 3 times ! \n");
-                printf(" you must wait 15s until lastest 3 times  \n");
-                for(int i = 0 ; i<=15 ; i++)
-                {
+            
+            if (attempts == 3) {
+                printf("\nYou entered an incorrect password 3 times!\n");
+                printf("Please wait 15 seconds before trying again...\n");
+                
+                for (int i = 1; i <= 15; i++) {
+                    printf(" %d seconds...\n", i);
                     fflush(stdout);
-                    printf("\a");
                     usleep(300000);
-                    printf("%d\n",i);
                 }
+                printf("You can try again now.\n");
             }
         }
     }
-    return ;
-
+    
+    printf("Too many failed attempts. Access denied!\n");
 }
 //=Team======================================================  Admin Menu ============================================================
 void Admin_Menu()
 {
-
+    Clear_Screen();
     int choice;
     do
     {
         printf("\nAdmin Menu\n");
+        usleep(300000);
         printf("1. Reserve Slot\n");
+        usleep(300000);
         printf("2. Edit Patient Record\n");
+        usleep(300000);
         printf("3. Cancel Reservation\n");
-        printf("4. usermood\n");
-        printf("5. Logout\n");
-
+        usleep(300000);
+        printf("4. Show treasury funds \n");
+        usleep(300000);
+        printf("5. usermood\n");
+        usleep(300000);
+        printf("6. Logout\n");
+        usleep(300000);
         printf("Enter your choice: ");
         fflush(stdin);
         scanf("%d", &choice);
+        switch(choice)
+        {
+            case 1: Clear_Screen(); Reserve_Slot(); break;
+            case 2: Clear_Screen(); Edit_Patient_Record(); break;
+            case 3: Clear_Screen(); Cancel_Reservation(); break;
+            case 4: Clear_Screen(); Money_safe_view(); break;
+            case 5: Clear_Screen(); User_Mood(); Home_Menu(); break;
+            case 6: Clear_Screen(); printf("Logging out...\n");choice=6; break;
+            default: printf("Invalid choice. Try again.\n");
+        }
+    } while(choice != 6);
+    
+}
+//=Eslam======================================================  Reserve a Slot ============================================================
+void Reserve_Slot()
+{
+    if(patientCount<35)
+    {
+        if(slotCount<35)
+        {
+            char choice;
+    do
+    {
+        printf("\n You want : \n");
+
+        printf("1. Register as New patient\n");
+        printf("2. Register as pre-existing patient\n");
+        printf("3. Register as Emergency patient\n");
+        printf("4. Back\n");
+
+        printf("Enter your choice: ");
+        fflush(stdin);
+        scanf("%c", &choice);
 
         switch(choice)
         {
-            case 1: Reserve_Slot(); break;
-            case 2: Edit_Patient_Record(); break;
-            case 3: Cancel_Reservation(); break;
-            case 4: User_Mood(); Home_Menu(); break;
-            case 5: printf("Logging out...\n"); break;
+            case '1': New_Patient();choice='4'; break;
+            case '2': Existing_Patient(); choice='4'; break;
+            case '3': Emergency_Patient(); choice='4'; break;
+            case '4': printf("back step\n"); break;
             default: printf("Invalid choice. Try again.\n");
         }
-    } while(choice != 4);
+    } while(choice != '4');
+        }
+    }
 
+}
+//======================================================new patient============================================================
+void New_Patient()
+{
+    if(patientCount<35&&slotCount<35&&First_Empty_Index()!=-1)
+    {
+         int index=First_Empty_Index();
+         int id;
+         int flag = 0 ;
+
+         do
+         {
+            printf("\nEntering new patient data:\n");
+            printf("*\a Note that:  not started whith 0\n");
+            printf("\n1-ID must contain 4 numbers");
+            printf("\n2-ID must be unique");
+            printf(" Enter ID:\n");
+            scanf("%i",&id);
+            clear_input_buffer();
+            if(Check_ID_Available(id)==1)
+            {
+              printf("Did user pay %i $? \n",price);
+              printf("\nif Yes : Enter 1 ");
+              printf("\nif No : press any thing else ");
+
+              char Cost_flag='0';
+              fflush(stdin);
+              scanf("%c",&Cost_flag);
+              
+              if(Cost_flag=='1')
+              {
+               printf("\nUser paid %i $!!\n",price);
+               patients[index].patientID=id;
+               /////////////////////////
+                Input_Valid_Name(index);
+                /////////////////////////
+                printf("Enter age:\n");
+                Input_Valid_Age(index);
+                /////////////////////////
+                Input_Valid_Gander(index);
+                /////////////////////////
+                Clear_Screen();
+                Choose_Slot(id);
+
+               char edit_confirm;
+               printf("\n\nDo yo want to edit any patient data?\n");
+               printf("if yes>>press 1\n");
+               printf("if no>>press any number\n");
+               fflush(stdin);
+               scanf("%c",&edit_confirm);
+
+               if(edit_confirm=='1')
+               {
+                Clear_Screen();
+                Edit_Patient_Record();
+               }
+               Clear_Screen();
+               printf("Patient data successfully added!!\n");
+               patientCount++;
+
+               flag=1;
+              }
+              else
+              {
+                  flag=1;
+                  printf("No data added for this user!\n");
+              }
+
+            }
+            else
+            {
+                printf(" Invalid ID \n");
+                printf(" try another one \n");
+            }
+         } while (flag==0);
+
+    }
+    else
+    {
+        printf("Maximum weekly capacitance reached!!\n");
+    }
+}
+int First_Empty_Index()
+{
+    int i;
+    for (i = 0; i < MAX_PATIENTS; i++)
+    {
+        if (strcmp(patients[i].name, "") == 0 &&
+            patients[i].age == 0 &&
+            strcmp(patients[i].gender, "") == 0 &&
+            patients[i].patientID == 0)
+        {
+            return i; // Return the first empty index found
+        }
+    }
+    return -1; // Return -1 if no empty slot is found
 }
 //=Mohamed======================================================  edit Patient Record ============================================================
 int Search_Patient(int patientID)
 {
     int i;
     for (i =0;i<MAX_PATIENTS;i++)
-        {
+    {
             if (patients[i].patientID==patientID&&patients[i].patientID!=0)
                 return (i) ;
         }
@@ -156,6 +307,7 @@ void Edit_Patient_Record()
         printf("please enter the ID..\n");
         fflush(stdin);
         scanf("%i",&ID);
+        clear_input_buffer();
         Index=Search_Patient(ID);
         //////////////////////////////
          if(Index>-1)
@@ -175,33 +327,28 @@ void Print_Patient_Data(int ID);//Rawda========================= works well
              int choice;
              fflush(stdin);
              scanf("%i",&choice);
-            /////////////////////////////////////////////////
             switch(choice)
             {
             case 1:
                 printf("New Name is:\n");
-                getchar();
-                fgets(patients[Index].name,50,stdin);
+                Input_Valid_Name(Index);
                 printf("update Patient details....\n");
                 Print_Patient_Data(Index);
                 exit_flag = 1;
                 break;
-             //********************************************* //
+            //******************************************* //
             case 2:
                 printf("New Age is:\n");
-                fflush(stdin);
-                scanf("%i",&patients[Index].age);
+                Input_Valid_Age(Index);
 
                 printf("update Patient details....\n");
                 Print_Patient_Data(Index);
                 exit_flag = 1;
                 break;
-            //********************************************* //
+            //******************************************* //
             case 3:
                 printf("New Gender is:\n");
-                getchar();
-                fgets(patients[Index].gender,10,stdin);
-
+                Input_Valid_Gander(Index);
 
                 printf("update Patient details....\n");
                 Print_Patient_Data(Index);
@@ -216,16 +363,13 @@ void Print_Patient_Data(int ID);//Rawda========================= works well
             //******************************************* //
             case 5:
                 printf("New Name is:\n");
-                getchar();
-                fgets(patients[Index].name,50,stdin);
+                Input_Valid_Name(Index);
            //////////////////////////////////////////
                 printf("New Age is:\n");
-                fflush(stdin);
-                scanf("%i",&patients[Index].age);
+                Input_Valid_Age(Index);
            ////////////////////////////////////////
                 printf("New Gender is:\n");
-                getchar();
-                fgets(patients[Index].gender,10,stdin);
+                Input_Valid_Gander(Index);
                 /////////////////////////////////////
                 printf("Editing main Reservation:\n");
                 Edit_Reserve(ID , Index );
@@ -235,66 +379,25 @@ void Print_Patient_Data(int ID);//Rawda========================= works well
           //********************************************* //
             case 6:
                 printf("Exiting Edit Mode...\n");
+                Clear_Screen();
                 Admin_Menu();
                 exit_flag = 1;
                 break;
         //********************************************* //
-
             default:
                 printf("invalid choice , Try again \n");
                 continue;
             }
-
-
          }
-
             else
         {
-
                 printf(" sorry , The ID is not exist \n");
                 break;
-
         }
-
-
     }
 //Mohamed
 }
 
-//=Eslam======================================================  Reserve a Slot ============================================================
-//
-void Reserve_Slot()
-{
-    if(patientCount<35)
-    {
-        if(slotCount<35)
-        {
-            int choice;
-    do
-    {
-        printf("\n You want : \n");
-        printf("1. Register as New patient\n");
-        printf("2. Register as pre-existing patient\n");
-        printf("3. Register as Emergency patient\n");
-        printf("4. Back\n");
-
-        printf("Enter your choice: ");
-        fflush(stdin);
-        scanf("%d", &choice);
-
-        switch(choice)
-        {
-            case 1: New_Patient();choice=4; break;
-            case 2: Existing_Patient(); choice=4; break;
-            case 3: Emergency_Patient(); choice=4; break;
-            case 4: printf("back step\n"); break;
-            default: printf("Invalid choice. Try again.\n");
-        }
-    } while(choice != 4);
-        }
-    }
-
-}
 //=Amir======================================================  Cancel a Reservation ============================================================
 void Delete_Patient_Data(int PatientLocation)
 {
@@ -314,6 +417,7 @@ void Cancel_Reservation()
     printf(" Enter Your ID .\n");
     fflush(stdin);
     scanf("%d", &ID);
+    clear_input_buffer();
     PatientLocation = Search_Patient(ID);
 
     if (PatientLocation !=-1)
@@ -359,6 +463,7 @@ void Cancel_Reservation()
                         slotCount--;
                         patients[PatientLocation].consult_flag=0;
                         printf(" We canceled your consultation .\n");
+                        printf(" But your slot and data still recorded .\n");
                     }
                 }
               }
@@ -376,116 +481,6 @@ void Cancel_Reservation()
 
   }
 
-//==Amir===========================================================check patient researve ====================================================
-
-int Check_Patient_researve(int patientID)
-{
-
-  int PatientLocation;
-  PatientLocation = Search_Patient(patientID);
-
-  if (PatientLocation != -1)
-  {
-    printf("User existed .\n");
-    for (int d = 0; d < DAYS_IN_WEEK; d++)
-    {
-      for (int s = 0; s < SLOTS_PER_DAY; s++)
-      {
-        if (busySlots[d][s] == patientID)
-        {
-          return 1;
-        }
-      }
-    }
-  }
-
-  else
-  {
-    printf("User not found");
-    return 0;
-  }
-  return 0 ;
-}
-//======================================================new patient============================================================
-void New_Patient()
-{
-    if(patientCount<35&&slotCount<35&&First_Empty_Index()!=-1)
-    {
-        int index=First_Empty_Index();
-
-         printf("Entering new patient data:\n");
-        
-         printf("Enter name:\n");
-         getchar();
-         fgets(patients[index].name,50,stdin);
-
-         printf("Enter age:\n");
-         fflush(stdin);
-         scanf("%i",&patients[index].age);
-
-         printf("Enter gender:\n");
-         getchar();
-         fgets(patients[index].gender,10,stdin);
-
-         int id;
-         int flag = 0 ;
-         do
-         {
-            printf("* Note that: \n1-ID must contain 4 numbers not started whith 0 \n 2-ID must be unique \n");
-            printf(" Enter ID:\n");
-            fflush(stdin);
-            scanf("%i",&id);
-            if(Check_ID_Available(id)==1)
-            {
-
-                printf("Did user pay %i $?:\nif Yes, Enter 1 \n if No, press any thing else \n",price);
-                int cost_flag=0;
-              fflush(stdin);
-              scanf("%i",&cost_flag);
-              if(cost_flag==1)
-              {
-               printf("User paid %i $!!\n",price);
-               patients[index].patientID=id;
-               Choose_Slot(id);
-               printf("Patient data successfully added!!\n");
-               patientCount++;
-               flag++;
-              }
-              else
-              {
-                  flag=1;
-                  printf("No data added for this user!\n");
-              }
-
-            }
-            else
-            {
-                printf(" Invalid ID \n");
-                printf(" try another one \n");
-            }
-         } while (flag==0);
-
-    }
-    else
-    {
-        printf("Maximum weekly capacitance reached!!\n");
-    }
-}
-int First_Empty_Index()
-{
-    int i;
-    for (i = 0; i < MAX_PATIENTS; i++)
-    {
-        if (strcmp(patients[i].name, "") == 0 &&
-            patients[i].age == 0 &&
-            strcmp(patients[i].gender, "") == 0 &&
-            patients[i].patientID == 0)
-        {
-            return i; // Return the first empty index found
-        }
-    }
-    return -1; // Return -1 if no empty slot is found
-}
 //==Eslam============================================================Existing Patient ====================================================
 void Existing_Patient()
 {
@@ -507,7 +502,7 @@ void Existing_Patient()
     printf(" You already recorded slot and consultation ");
     }
     else
-    {
+    {   Clear_Screen();
         Choose_Slot(ID);
         patients[PatientLocation].consult_flag=1;
         printf("Consultation is for free!\n");
@@ -635,7 +630,8 @@ void Edit_Reserve(int ID, int Index)
             {
 
           if (busySlots[i][j]==ID)
-         {
+         {  
+            Clear_Screen();
             Choose_Slot(ID);
              availableSlots[i][j]=1;
              busySlots[i][j]=0;
@@ -646,7 +642,6 @@ void Edit_Reserve(int ID, int Index)
              printf("Reservation has  changed....\n");
              break;
          }
-
            }
 
           }
@@ -777,3 +772,92 @@ void Emergency_Patient()
     }
 
 }
+
+//============================================================== choose emergency =============================================================
+void Money_safe_view()
+{
+    printf("Total money in safe is:%d\n",patientCount*price);
+}
+//============================================================== choose emergency =============================================================
+
+void Input_Valid_Age(int index)
+{
+    int valid_input;
+    do
+    {
+        valid_input = scanf("%d", &patients[index].age);
+
+        if (valid_input != 1 || patients[index].age <= 0||patients[index].age>120) 
+        {
+            printf("Invalid input. Please enter a valid age (positive number smaller than 120 ).\n");
+            clear_input_buffer();
+        }
+    } while (valid_input != 1 || patients[index].age <= 0||patients[index].age>120); 
+}
+//============================================================== choose emergency =============================================================
+void clear_input_buffer()
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+//============================================================== Valid_String =============================================================
+ 
+int Valid_String(const char* str)
+{
+    int lnth = strlen(str);
+    for (int i = 0; i < lnth; i++)
+    {
+        if (!isalpha(str[i]) && str[i] != ' ')
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+//============================================================== Valid_String =============================================================
+void Clear_Screen() 
+{
+    system("clear");
+}
+
+//============================================================== input_valid_Name =============================================================
+void Input_Valid_Name(int index)
+{
+    while (1)
+    {
+        fflush(stdin);
+        printf("Enter name:\n");
+        fgets(patients[index].name, 50, stdin);
+        patients[index].name[strcspn(patients[index].name, "\n")] = 0;
+
+        if (strlen(patients[index].name) == 0)
+        {
+            printf("Error: Name cannot be empty.\n");
+            continue;
+        }
+
+        if (Valid_String(patients[index].name))
+        {
+            break;
+        }
+        printf("Error: Name must contain only letters and spaces.\n");
+    }
+}
+//============================================================== input_valid_Name =============================================================
+void Input_Valid_Gander(int index)
+{
+    while (1) {
+        printf("Enter gender (male/female):\n");
+        fflush(stdin);
+        fgets(patients[index].gender, sizeof(patients[index].gender), stdin);
+        patients[index].gender[strcspn(patients[index].gender, "\n")] = 0; // Remove newline
+
+        if (strcmp(patients[index].gender, "Female") == 0 ||strcmp(patients[index].gender, "Male") == 0 ||strcmp(patients[index].gender, "male") == 0 || strcmp(patients[index].gender, "female") == 0) {
+            break;
+        }
+
+        printf("Error: Gender must be exactly 'Male','male' or 'Female','female'.\n");
+    }
+}
+
+//============================================================== input_valid_Name =============================================================

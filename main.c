@@ -7,6 +7,7 @@ int main()
     {
         Wellcome();
         Home_Menu();
+        system("clear");
         printf("\nIf you want to close the program, Enter 0. Otherwise, enter anything else: ");
         scanf(" %c", &flag); 
     }
